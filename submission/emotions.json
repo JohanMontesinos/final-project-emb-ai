@@ -1,4 +1,4 @@
-'{
+{
     "emotionPredictions": [
         {
             "emotion": {
@@ -31,4 +31,4 @@
         "name": "Ensemble Aggregated Emotion Workflow",
         "version": "0.0.1"
     }
-}'
+}

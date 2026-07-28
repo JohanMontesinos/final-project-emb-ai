@@ -2,8 +2,11 @@
 Emotion Detection of a given text using
 IBM Watson NLP API
 """
+
 import json
+
 import requests
+
 
 def emotion_detector(text_to_analyze):
     """
@@ -22,22 +25,22 @@ def emotion_detector(text_to_analyze):
     response = requests.post(url, headers=headers, json=myobj, timeout=9)
     # Parsing the response to json for extracting the emotion scores
     response_dict = json.loads(response.text)
-    emotions = response_dict['emotionPredictions'][0]['emotion']
-    anger_score = emotions['anger']
-    disgust_score = emotions['disgust']
-    fear_score = emotions['fear']
-    joy_score = emotions['joy']
-    sadness_score = emotions['sadness']
+    emotions = response_dict["emotionPredictions"][0]["emotion"]
+    anger_score = emotions["anger"]
+    disgust_score = emotions["disgust"]
+    fear_score = emotions["fear"]
+    joy_score = emotions["joy"]
+    sadness_score = emotions["sadness"]
     # Determining the dominant emotion based on the highest score
     dominant_emotion = max(emotions, key=emotions.get)
     # Creating a dictionary to store the emotion scores and the dominant emotion
     output = {
-        'anger': anger_score,
-        'disgust': disgust_score,
-        'fear': fear_score,
-        'joy': joy_score,
-        'sadness': sadness_score,
-        'dominant_emotion': dominant_emotion
+        "anger": anger_score,
+        "disgust": disgust_score,
+        "fear": fear_score,
+        "joy": joy_score,
+        "sadness": sadness_score,
+        "dominant_emotion": dominant_emotion,
     }
     # Returning the output dictionary containing the emotion scores and dominant emotion
     return output
