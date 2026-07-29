@@ -10,12 +10,7 @@ A full-stack Python web application that uses the **IBM Watson NLP EmotionPredic
 - [Overview](#-overview)
 - [Project Architecture](#-project-architecture)
 - [Directory Structure](#-directory-structure)
-- [Features](#-features)
-- [Prerequisites & Installation](#-prerequisites--installation)
-- [Usage & Execution](#-usage--execution)
-- [API Reference](#-api-reference)
-- [Testing & Validation](#-testing--validation)
-- [License](#-license)
+
 
 ---
 
