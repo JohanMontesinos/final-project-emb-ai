@@ -23,8 +23,19 @@ def emotion_detector(text_to_analyze):
     myobj = {"raw_document": {"text": text_to_analyze}}
     # Making a POST request to the IBM Watson NLP API for emotion detection
     response = requests.post(url, headers=headers, json=myobj, timeout=9)
-    # Parsing the response to json for extracting the emotion scores
+    # Error handling of unsuccessful requests
+    if response.status_code == 400 or response.status_code == 500:
+        return {
+            "anger": None,
+            "disgust": None,
+            "fear": None,
+            "joy": None,
+            "sadness": None,
+            "dominant_emotion": None,
+        }
+    # Parsing the response to json.
     response_dict = json.loads(response.text)
+    # Extract emotion predictions if present in response
     emotions = response_dict["emotionPredictions"][0]["emotion"]
     anger_score = emotions["anger"]
     disgust_score = emotions["disgust"]
@@ -33,7 +44,6 @@ def emotion_detector(text_to_analyze):
     sadness_score = emotions["sadness"]
     # Determining the dominant emotion based on the highest score
     dominant_emotion = max(emotions, key=emotions.get)
-    # Creating a dictionary to store the emotion scores and the dominant emotion
     output = {
         "anger": anger_score,
         "disgust": disgust_score,
@@ -42,5 +52,5 @@ def emotion_detector(text_to_analyze):
         "sadness": sadness_score,
         "dominant_emotion": dominant_emotion,
     }
-    # Returning the output dictionary containing the emotion scores and dominant emotion
+    # Returning the given emotion detection.
     return output

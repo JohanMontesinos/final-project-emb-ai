@@ -2,10 +2,12 @@
 analysis to be executed over the Flask channel and deployed on
 localhost:5000.
 """
+
 from EmotionDetection.emotion_detection import emotion_detector
 from flask import Flask, render_template, request
 
 app = Flask("Emotion Detector")
+
 
 @app.route("/")
 def render_index():
@@ -15,11 +17,13 @@ def render_index():
     """
     return render_template("index.html")
 
+
 @app.route("/emotionDetector")
 def detect_emotion():
     """
     This function initiates the emotion detection process over the
-    Flask channel and returns the detected emotions and their scores.
+    Flask channel and returns the detected emotions and their scores
+    in JSON format.
     """
     # Retrieving the text input for emotion detection from the request arguments.
     text_to_analyze = request.args.get("textToAnalyze")
@@ -32,16 +36,17 @@ def detect_emotion():
     joy = response["joy"]
     sadness = response["sadness"]
     dominant_emotion = response["dominant_emotion"]
-    # Checking if the dominant emotion is None, indicating an invalid text input.
+
     if dominant_emotion is None:
         return "Invalid text! Please try again!."
-    # Return the detected emotions and their scores in a formatted string.
+    # Return the string format.
     return (
         f"For the given statement, the system response is "
         f"'anger': {anger}, 'disgust': {disgust}, 'fear': {fear}, "
         f"'joy': {joy} and 'sadness': {sadness}. "
         f"The dominant emotion is {dominant_emotion}."
     )
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
